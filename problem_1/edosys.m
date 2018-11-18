@@ -9,8 +9,8 @@
 
 ## PROBLEMA 1
 
-## NOMBRE:
-## CARNE:
+## NOMBRE: Juan Esteban Navarro Camacho
+## CARNE: 201236227
 
 1;
 
@@ -18,11 +18,11 @@ global m = 0.1;   ## Masa de la partícula
 global b = 0.05;  ## Coeficiente de atenuación
 global k = 1;     ## Constante de Hook
 
-## ################## 
+##     
 ## ## Problema 1.1 ##
 ## ################## 
 ## Fuerza aplicada en la partícula
-global F=@(x,v,t) 0;  ## <<< Ponga aquí su solución
+global F=@(x,v,t) -k*x -b*v;  ## <<< Ponga aquí su solución
 
 
 ## Resuelva el sistema atenuado masa resorte usando Euler
@@ -37,17 +37,24 @@ function [t,x]=eulersys(tn,Dt)
   ## Pre-reserve la memoria utilizada.
   x=zeros(size(t));
   v=zeros(size(t));
+  
 
   ## Condiciones iniciales
   x(1)=-1;
+  ## suponer que velocidad v(1) = 0 inicial igual cero
+
+  
 
   ## ################## 
-  ## ## Problema 1.2 ##
+  ## ## Problema 1.2 ##´´
   ## ################## 
 
   ## Resuelva el sistema de ecuaciones con Euler
 
-  ## >>> Ponga aquí su solución <<<
+  for it = 2:size(t)(2)
+    v(it) = v(it-1) + (F(x(it-1),v(it-1),t(it-1))/m)*Dt;
+    x(it) = x(it-1) + v(it)*Dt;
+  endfor
 endfunction
   
 figure(1,"name","Euler");
@@ -65,7 +72,7 @@ plot(t,x,"b;\\Delta t=0.001;");
 xlabel("t");
 ylabel("x(t)");
 axis([0,10,-2,2]);
-grid on;
+#grid on;
 
 ## Resuelva el sistema de ecuaciones con Runge-Kutta 4to orden
 ## tn Último instante de tiempo
