@@ -56,15 +56,14 @@ function [t,x]=eulersys(tn,Dt)
     x(it) = x(it-1) + v(it)*Dt;
   endfor
 endfunction
-  
 figure(1,"name","Euler");
 hold off;
 [t,x]=eulersys(10,0.05);
-plot(t,x,"r;\\Delta t=0.05;");
+plot(t,x,"r;\\Delta t=0.5;");
 
 hold on;
 [t,x]=eulersys(10,0.01);
-plot(t,x,"m;\\Delta t=0.01;");
+plot(t,x,"g;\\Delta t=0.01;");
 
 [t,x]=eulersys(10,0.001);
 plot(t,x,"b;\\Delta t=0.001;");
@@ -72,7 +71,7 @@ plot(t,x,"b;\\Delta t=0.001;");
 xlabel("t");
 ylabel("x(t)");
 axis([0,10,-2,2]);
-#grid on;
+grid on;
 
 ## Resuelva el sistema de ecuaciones con Runge-Kutta 4to orden
 ## tn Último instante de tiempo
@@ -99,7 +98,7 @@ endfunction
 
 figure(2,"name","RK");
 hold off;
-[t,x]=rksys(10,0.05);
+[t,x]=rksys(10,0.1);
 plot(t,x,"r;\\Delta t=0.05;");
 
 hold on;
