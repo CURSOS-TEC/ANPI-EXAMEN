@@ -59,13 +59,16 @@ endfunction
 figure(1,"name","Euler");
 hold off;
 [t,x]=eulersys(10,0.05);
-plot(t,x,"r;\\Delta t=0.5;");
+
+plot(t,x,"r;\\Delta t=0.05;");
 
 hold on;
 [t,x]=eulersys(10,0.01);
+
 plot(t,x,"g;\\Delta t=0.01;");
 
 [t,x]=eulersys(10,0.001);
+
 plot(t,x,"b;\\Delta t=0.001;");
 
 xlabel("t");
