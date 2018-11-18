@@ -24,6 +24,10 @@ global k = 1;     ## Constante de Hook
 ## Fuerza aplicada en la partícula
 global F=@(x,v,t) -k*x -b*v;  ## <<< Ponga aquí su solución
 
+global G=@(x,v,t) v;  ## <<< Ponga aquí su solución
+global H=@(x,v,t) F(x,v,t)/m;  ## <<< Ponga aquí su solución
+
+
 
 ## Resuelva el sistema atenuado masa resorte usando Euler
 ## tn el último instante de tiempo
@@ -80,7 +84,7 @@ grid on;
 ## tn Último instante de tiempo
 ## Dt Paso temporal (delta t)
 function [t,x] = rksys(tn,Dt)
-  global m b k F;
+  global m b k F H G;
 
   t=0:Dt:tn; ## Intervalo de simulación
 
@@ -95,13 +99,28 @@ function [t,x] = rksys(tn,Dt)
   ## ## Problema 1.4 ##
   ## ################## 
 
-  ## >>> Ponga aquí su solución <<<
+  for it = 2:size(t)(2)
+    l_1 =  H( x(it-1), v(it-1), t(it-1))*Dt;
+    k_1 =  G( x(it-1), v(it-1), t(it-1))*Dt;
+    
+    l_2 =  H( x(it-1) + k_1/2 , v(it-1) + l_1/2 , t(it)/2 )*Dt;
+    k_2 =  G( x(it-1) + k_1/2 , v(it-1) + l_1/2 , t(it)/2 )*Dt;
+    
+    l_3 =  H( x(it-1) + k_2/2 , v(it-1) + l_2/2 , t(it)/2 )*Dt;
+    k_3 =  G( x(it-1) + k_2/2 , v(it-1) + l_2/2 , t(it)/2 )*Dt;
+    
+    l_4 =  H( x(it-1) + k_3, v(it-1) + l_3, t(it))*Dt;
+    k_4 =  G( x(it-1) + k_3, v(it-1) + l_3, t(it))*Dt;
+    
+    v(it) = v(it-1) + (1/6)* (l_1 + 2*l_2 + 2*l_3 + k_4);
+    x(it) = x(it-1) + (1/6)* (k_1 + 2*k_2 + 2*k_3 + k_4);
+  endfor
 
 endfunction
 
 figure(2,"name","RK");
 hold off;
-[t,x]=rksys(10,0.1);
+[t,x]=rksys(10,0.05);
 plot(t,x,"r;\\Delta t=0.05;");
 
 hold on;
