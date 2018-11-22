@@ -9,7 +9,7 @@
 
 ## PROBLEMA 2
 
-## NOMBRE: JUan Esteban Navarro Camacho
+## NOMBRE: Juan Esteban Navarro Camacho
 ## CARNE: 201236227
 2;
 
@@ -51,6 +51,7 @@ function fpp=findDerivs(t,f)
   ## ################## 
   for i = 2:N
    #X_i es t_i+1
+   #Tomado de la presentación de La Lección 15
    M(i,i-1)   = t(i)-t(i-1);
    M(i,i) = 2*(t(i+1)-t(i-1));
    M(i,i+1) = t(i+1)-t(i);
@@ -95,6 +96,7 @@ endfunction
 ## retorna fs: valores de la función en los xs dados
 function fs=interpole(t,f,ts)
   assert(size(t)==size(f));
+ 
   ts=ts(:); ## Asegúrese de que es un vector columna
   ## Encuentre las segundas derivadas
   fpp=findDerivs(t,f);
@@ -163,6 +165,7 @@ plot(D(:,1),D(:,2),'rx-',"linewidth",2);
 
 step=0.1;
 t=0:step:N-step;
+
 xs=interpole([0:N-1]',D(:,1),t);
 ys=interpole([0:N-1]',D(:,2),t);
 
