@@ -49,17 +49,17 @@ function fpp=findDerivs(t,f)
   ## ################## 
   ## ## Problema 2.4 ##
   ## ################## 
-  for i = 2:N-1
+  for i = 2:N
    #X_i es t_i+1
-   M(i,i)   = t(i+1)-t(i);
-   M(i,i+1) = 2*(t(i+2)-t(i));
-   M(i,i+2) = t(i+2)-t(i+1);
+   M(i,i-1)   = t(i)-t(i-1);
+   M(i,i) = 2*(t(i+1)-t(i-1));
+   M(i,i+1) = t(i+1)-t(i);
    
-   A = f(i+2) - f(i+1);
-   B = t(i+2) - t(i+1);
+   A = f(i+1) - f(i);
+   B = t(i+1) - t(i);
    
-   C = f(i+1) - f(i);
-   D = t(i+1) - t(i);
+   C = f(i) - f(i-1);
+   D = t(i) - t(i-1);
    
    b(i) = 6*(A/B) - 6*(C/D);
    
@@ -71,12 +71,7 @@ function fpp=findDerivs(t,f)
   
   b(1) = 6*(f(2)-f(1))/(t(2)-t(1)) - 6*(f(1)-f(N+1))/(t(1)-t(N+1));
   
-  #penúltima fila
-  M(N,N-1) = t(N)-t(N-1);
-  M(N,N) =2*( t(N+1)-t(N-1));
-  M(N,N+1) = t(N+1)-t(N);
   
-  b(N) = 6*(f(N+1)-f(N))/(t(N+1)-t(N)) - 6*(f(N)-f(N-1))/(t(N)-t(N-1));
   
   #última fila
   M(N+1,N) = t(N+1)-t(N);
