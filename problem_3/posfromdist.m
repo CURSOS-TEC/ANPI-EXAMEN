@@ -87,7 +87,7 @@ function p=calcPosition(dists,emisorPos,option=1)
 
   ## Calcule la matriz seudo-inversa utilizando SVD
   iM=pinv(M); ## <<< Ponga su solución aquí (se busca calcular esto con SVD)
-  
+  #Retorna un arreglo de tres valores
   [X,Y,Z] = svd(M);
   
   x = resize(X,rows(M),columns(M));
