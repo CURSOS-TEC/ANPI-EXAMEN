@@ -57,7 +57,7 @@ function [t,x]=eulersys(tn,Dt)
 
   for it = 2:size(t)(2)
     v(it) = v(it-1) + (F(x(it-1),v(it-1),t(it-1))/m)*Dt;
-    x(it) = x(it-1) + v(it)*Dt;
+    x(it) = x(it-1) + v(it-1)*Dt;
   endfor
 endfunction
 figure(1,"name","Euler");
