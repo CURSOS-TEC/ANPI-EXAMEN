@@ -61,23 +61,24 @@ function p=calcPosition(dists,emisorPos,option=1)
 
   M=[M];
   
-  #M # impresión para depurar, #el breakpoint va aquí
+  M # impresión para depurar, #el breakpoint va aquí
   
 
   ## ##################
   ## ## Problema 3.2 ##
   ## ##################
   ## Construya el vector b
-  b = zeros(dim,1); ## <<< Ponga su solución aquí
-  k = 1;
-  while k <= rows(b)
-    b(k,1) = dists(k)^2 - norm([emisorPos(1,k) emisorPos(2,k) emisorPos(3,k)])^2;
-    k++;
-  endwhile
+   b = zeros(dim,1); 
+   
+   for k = 1:size(b)(1)
+     #se define el i-ésimo emisor
+     emisor = [emisorPos(1,k) emisorPos(2,k) emisorPos(3,k)];
+     b(k,1) = (dists(k)*dists(k)) - (norm(emisor)*norm(emisor));
+   endfor
+   b1 = b;
   
-  b1 = b;
+   b1;
   
-  #b1
   
 
   ## ##################
