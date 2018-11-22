@@ -69,24 +69,24 @@ function fpp=findDerivs(t,f)
   M(1,1) =2*( t(2)-t(N+1));
   M(1,2) = t(2)-t(1);
   
-  b(1) = 6*(f(2)-f(1))/(t(2)-t(1)) + 6*(f(1)-f(N+1))/(t(1)-t(N+1));
+  b(1) = 6*(f(2)-f(1))/(t(2)-t(1)) - 6*(f(1)-f(N+1))/(t(1)-t(N+1));
   
   #penúltima fila
   M(N,N-1) = t(N)-t(N-1);
   M(N,N) =2*( t(N+1)-t(N-1));
   M(N,N+1) = t(N+1)-t(N);
   
-  b(N) = 6*(f(N+1)-f(N))/(t(N+1)-t(N)) + 6*(f(N)-f(N-1))/(t(N)-t(N-1));
+  b(N) = 6*(f(N+1)-f(N))/(t(N+1)-t(N)) - 6*(f(N)-f(N-1))/(t(N)-t(N-1));
   
   #última fila
   M(N+1,N) = t(N+1)-t(N);
   M(N+1,N+1) =2*( t(1)-t(N));
   M(N+1,1) = t(1)-t(N+1);
   
-  b(N+1) =  6*(f(1)-f(N+1))/(t(1)-t(N+1)) + 6*(f(N+1)-f(N))/(t(N+1)-t(N));
+  b(N+1) =  6*(f(1)-f(N+1))/(t(1)-t(N+1)) - 6*(f(N+1)-f(N))/(t(N+1)-t(N));
 
   ## >>> Ponga su solución aquí <<<
-  M 
+  
   
   ## Resuelva el sistema
   fpp = M\b; 
