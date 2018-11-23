@@ -61,7 +61,7 @@ function p=calcPosition(dists,emisorPos,option=1)
 
   M=[M];
   
-  M # impresión para depurar, #el breakpoint va aquí
+  M; # impresión para depurar, #el breakpoint va aquí
   
 
   ## ##################
@@ -231,7 +231,15 @@ function d=calcDistances(pos,emisorPos)
   ## ##################
 
   ## >>> Ponga su solución aquí <<<
-  d=zeros(rows(pos),1);
+  d = zeros(rows(pos),5);
+  m = 1;
+  n = 1;
+  for m = 1:rows(pos)
+    for n = 1:columns(pos)
+      d(m,n) = sqrt(((pos(m,1)-emisorPos(1,n))^2) + ((pos(m,2)-emisorPos(2,n))^2) + ((pos(m,3)-emisorPos(3,n))^2));
+    endfor
+  endfor
+  
 endfunction
 
 
